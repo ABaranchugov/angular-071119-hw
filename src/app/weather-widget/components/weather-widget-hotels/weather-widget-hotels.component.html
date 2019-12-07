@@ -1,0 +1,13 @@
+<div class="village">
+  <h3>Righteous indignation & like</h3>
+  <span class="line"></span>
+  <div class="activity_box">
+    <div class="scrollbar" id="style-2">
+      <app-weather-widget-hotel *ngFor="let hotel of hotels"
+                                [hotel]="hotel"
+                                (click)="select(hotel)"
+      >
+      </app-weather-widget-hotel>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.activity-row {
+  margin: -8px -16px 8px;
+  padding: 8px 16px;
+}
+.activity-row:hover {
+  background: #f0f0f0;
+  cursor: pointer;
+}
+img {
+  height: 50px;
+  width: 50px;
+  margin: 0 3px;
+}

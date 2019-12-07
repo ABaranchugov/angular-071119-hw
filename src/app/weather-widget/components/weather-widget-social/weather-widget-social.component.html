@@ -1,0 +1,24 @@
+<div class="teddy-bear">
+  <ng-container *ngIf="socialInfo">
+    <div class="teddy-text">
+      <h4>{{title}}</h4>
+      <span class="w-line"> </span>
+      <img [src]="socialInfo.img | image"
+           [alt]="title"
+           class="img-responsive"
+      >
+    </div>
+    <div class="teddy-follow">
+      <ul>
+        <li class="folw-h">
+          <h3>{{followers}}</h3>
+          <p>Followers</p>
+        </li>
+        <li>
+          <h3>{{following}}</h3>
+          <p>Following</p>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+</div>

@@ -5,7 +5,7 @@ import {IHotels} from '../models/hotels.model';
   name: 'hotelsTypes'
 })
 export class HotelsTypesPipe implements PipeTransform {
-  transform(hotels: IHotels): string[] {
+  public transform(hotels: IHotels): string[] {
     const types: string[] = hotels.map(hotel =>
       hotel.type
     );

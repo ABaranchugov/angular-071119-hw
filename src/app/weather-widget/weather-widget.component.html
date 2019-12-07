@@ -11,6 +11,7 @@
     </app-weather-widget-switcher>
     
     <app-weather-widget-hotels [hotels]="hotels | filter : 'type' : selectedType"
+                               [type]="selectedType"
                                (onSelect)="selectHotel($event)"
     >
     </app-weather-widget-hotels>
@@ -21,7 +22,7 @@
     <app-weather-widget-social [social-info]="selectedHotel?.social_info"></app-weather-widget-social>
   </div>
   
-  <div class="clear"> </div>
+  <div class="clear"></div>
 </div>
 
 <ng-template #loader>

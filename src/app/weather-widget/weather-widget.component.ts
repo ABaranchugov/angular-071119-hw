@@ -1,8 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IHotel, IHotels} from './models/hotels.model';
 import {getHotels$} from '../mock/hotels.mock';
-import {Observable, Subject} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-weather-widget',
@@ -22,7 +20,7 @@ export class WeatherWidgetComponent implements OnInit {
     this.selectedType = selectedType;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     getHotels$().subscribe(hotels =>
       this.hotels = hotels
     );

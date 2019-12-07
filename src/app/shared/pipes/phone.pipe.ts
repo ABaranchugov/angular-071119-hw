@@ -1,5 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {parsePhoneNumber, CountryCode} from 'libphonenumber-js/min';
 import * as phoneFormatter from 'phone-formatter';
 
 @Pipe({

@@ -1,18 +1,15 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {ISocialInfo} from '../../models/social-info.model';
 
 @Component({
   selector: 'app-weather-widget-social',
   templateUrl: './weather-widget-social.component.html',
-  styleUrls: ['./weather-widget-social.component.css']
+  styleUrls: ['./weather-widget-social.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherWidgetSocialComponent {
-  public socialInfo: ISocialInfo;
-
   @Input('social-info')
-  private set inputSocialInfo(socialInfo: ISocialInfo) {
-    this.socialInfo = socialInfo;
-  }
+  public socialInfo: ISocialInfo;
 
   public get title(): string {
     return this.socialInfo.title;

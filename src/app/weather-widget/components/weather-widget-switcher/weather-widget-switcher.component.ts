@@ -6,21 +6,18 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./weather-widget-switcher.component.css']
 })
 export class WeatherWidgetSwitcherComponent {
-  public currentValue: string;
   public values: string[] = [];
+
+  @Input('current-value')
+  public currentValue: string;
 
   @Input('values')
   public set inputValues(values: string[]) {
     this.values = values;
 
-    if (this.values.length > 0) {
-      this.onSwitch.emit(values.slice(0, 1).shift());
+    if (values.length > 0) {
+      this.onSwitch.emit(values[0]);
     }
-  }
-
-  @Input('current-value')
-  public set inputCurrentValue(currentValue: string) {
-    this.currentValue = currentValue;
   }
 
   @Output()

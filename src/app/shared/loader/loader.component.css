@@ -5,14 +5,14 @@
 .loader__spin {
   left: calc(50% - 50px);
   top: calc(50% - 50px);
-  animation: mat-progress-spinner-linear-rotate 2s linear infinite!important;
+  animation: mat-progress-spinner-linear-rotate 2s linear infinite !important;
 }
 
 /* Добавляем это, ибо по невдомым причинам спиннер не крутится из коробки */
 /deep/ .loader__spin circle {
-  animation-name: mat-progress-spinner-stroke-rotate-100!important;
-  transition-property: stroke!important;
-  animation-duration: 4s!important;
-  animation-timing-function: cubic-bezier(.35,0,.25,1)!important;
-  animation-iteration-count: infinite!important;
+  animation-name: mat-progress-spinner-stroke-rotate-100 !important;
+  transition-property: stroke !important;
+  animation-duration: 4s !important;
+  animation-timing-function: cubic-bezier(.35, 0, .25, 1) !important;
+  animation-iteration-count: infinite !important;
 }

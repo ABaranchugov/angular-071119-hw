@@ -1,7 +1,4 @@
 export const environment = {
-  imagesPath: './static/assets/images/',
+  baseUrl: 'https://api.github.com',
   production: true,
-  title: 'Weather Widget',
-  copyright: 'Weather Widget. All rights reserved | Released by Alexander Baranchugov',
-  date: new Date()
 };

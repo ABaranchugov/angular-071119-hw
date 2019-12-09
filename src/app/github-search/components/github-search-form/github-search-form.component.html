@@ -1,0 +1,50 @@
+<form nz-form [nzLayout]="'vertical'">
+  <nz-form-item>
+    <nz-form-label>
+      Search query
+    </nz-form-label>
+    
+    <nz-form-control>
+      <div class="search">
+        <nz-input-group nzSearch
+                        [nzPrefixIcon]="'search'"
+                        [nzSuffix]="suffixTemplate"
+        >
+          <input #input
+                 type="text"
+                 nz-input
+                 placeholder="Enter search query"
+                 (keyup)="keyup(input.value)"
+          />
+        </nz-input-group>
+        
+        <button nz-button
+                nzType="primary"
+                nzSearch
+                [disabled]="input.value.length < 4"
+                (click)="refresh()"
+        >
+          <i nz-icon
+             nzType="sync"
+          >
+          </i>
+        </button>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<ng-template #suffixIconButton>
+</ng-template>
+
+<ng-template #suffixTemplate>
+  <i nz-icon
+     nz-tooltip
+     class="ant-input-clear-icon"
+     nzTheme="fill"
+     nzType="close-circle"
+     *ngIf="input.value !== ''"
+     (click)="input.value = ''; keyup('')"
+  >
+  </i>
+</ng-template>

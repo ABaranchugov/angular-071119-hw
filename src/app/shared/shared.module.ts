@@ -1,31 +1,28 @@
 import {NgModule} from '@angular/core';
-import {MatProgressSpinnerModule} from '@angular/material';
-import {CommonModule} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import {LoaderComponent} from './loader/loader.component';
-import {PhonePipe} from './pipes/phone.pipe';
 import {FilterPipe} from './pipes/filter.pipe';
-import {ImagePipe} from './pipes/image.pipe';
-import {BackgroundImageUrlPipe} from './pipes/background-image-url.pipe';
+import {NgZorroAntdModule, NZ_I18N, ru_RU} from 'ng-zorro-antd';
+import ru from '@angular/common/locales/ru';
+
+registerLocaleData(ru);
 
 @NgModule({
   declarations: [
     LoaderComponent,
-    PhonePipe,
-    FilterPipe,
-    ImagePipe,
-    BackgroundImageUrlPipe
+    FilterPipe
   ],
   imports: [
     CommonModule,
-    MatProgressSpinnerModule
+    NgZorroAntdModule
   ],
   exports: [
     CommonModule,
     LoaderComponent,
-    FilterPipe,
-    ImagePipe,
-    BackgroundImageUrlPipe,
-    PhonePipe
+    FilterPipe
+  ],
+  providers: [
+    {provide: NZ_I18N, useValue: ru_RU}
   ]
 })
 export class SharedModule {

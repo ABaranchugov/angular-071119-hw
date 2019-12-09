@@ -1,0 +1,69 @@
+<nz-spin [nzSpinning]="loading$ | async">
+  <nz-empty *ngIf="!((results$ | async)?.items.length > 0); else list"></nz-empty>
+  
+  
+</nz-spin>
+
+<ng-template #list>
+  <nz-list [nzDataSource]="((results$ | async)?.items || []) | slice: sliceStart : sliceEnd"
+           [nzItemLayout]="'vertical'"
+           [nzRenderItem]="item"
+           [nzPagination]="paginationExtra"
+  >
+      <ng-template #item let-item>
+        <nz-list-item [nzContent]="item.description"
+                      [nzActions]="[starAction, watchAction, forkAction]"
+                      [nzExtra]="extra"
+        >
+          <ng-template #starAction>
+            <i nz-icon
+               nzType="star-o"
+               style="margin-right: 8px;"
+            >
+            </i>{{item.stargazers_count}}
+          </ng-template>
+          
+          <ng-template #watchAction>
+            <i nz-icon
+               nzType="eye"
+               style="margin-right: 8px;"
+            >
+            </i>
+            {{item.watchers_count}}
+          </ng-template>
+          
+          <ng-template #forkAction>
+            <i nz-icon
+               nzType="fork"
+               style="margin-right: 8px;"
+            >
+            </i> {{item.forks_count}}
+          </ng-template>
+          
+          <nz-list-item-meta [nzAvatar]="item.avatar"
+                             [nzTitle]="nzTitle"
+          >
+            <ng-template #nzTitle>
+              <a [href]="item.html_url">
+              {{ item.full_name }}</a>
+            </ng-template>
+          </nz-list-item-meta>
+          
+          <ng-template #extra>
+            <img width="140"
+                 alt="logo"
+                 [src]="item.owner.avatar_url"
+            />
+          </ng-template>
+        </nz-list-item>
+      </ng-template>
+      <ng-template #paginationExtra>{{pagination | json}}
+        <nz-pagination [(nzPageIndex)]="pagination.index"
+                       [(nzPageSize)]="pagination.size"
+                       [nzPageSizeOptions]="[5,10,20,30]"
+                       [nzTotal]="(results$ | async)?.items.length"
+        >
+        </nz-pagination>
+      </ng-template>
+  </nz-list>
+</ng-template>

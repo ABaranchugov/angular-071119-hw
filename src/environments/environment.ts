@@ -3,11 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  imagesPath: './assets/images/',
+  baseUrl: 'https://api.github.com',
   production: false,
-  title: 'Weather Widget',
-  copyright: 'Weather Widget. All rights reserved | Released by Alexander Baranchugov',
-  date: new Date()
 };
 
 /*

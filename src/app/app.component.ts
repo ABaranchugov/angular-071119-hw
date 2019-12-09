@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {environment} from '../environments/environment';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +6,4 @@ import {environment} from '../environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public copyright: string = environment.copyright;
-  public title: string = environment.title;
-  public date: Date = environment.date;
 }

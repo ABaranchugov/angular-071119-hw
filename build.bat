@@ -1,1 +1,1 @@
-npm run-script build --  --prod --base-href /angular-071119-hw/home-work-1/ --deploy-url ./static/
+npm run-script build --  --prod --base-href /angular-071119-hw/home-work-2/ --deploy-url ./static/

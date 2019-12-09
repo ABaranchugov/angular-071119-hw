@@ -57,7 +57,7 @@
           </ng-template>
         </nz-list-item>
       </ng-template>
-      <ng-template #paginationExtra>{{pagination | json}}
+      <ng-template #paginationExtra>
         <nz-pagination [(nzPageIndex)]="pagination.index"
                        [(nzPageSize)]="pagination.size"
                        [nzPageSizeOptions]="[5,10,20,30]"

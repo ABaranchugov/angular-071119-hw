@@ -34,11 +34,7 @@ export class SearchService {
   }
 
   public set searchValue(value: string) {
-    this._searchValue$.next({value, refresh: false});
-  }
-
-  public refresh(): void {
-    this._searchValue$.next({value: this._lastSearchedValue, refresh: true});
+    this._searchValue$.next({value});
   }
 
   private createSearchResultsStream(): void {
@@ -47,34 +43,34 @@ export class SearchService {
     this._searchResults$ = this._searchValue$
       .pipe(
         filter(({value}: ISearchQuery) => {
-          const result: boolean = value.length > 3;
+          const isNotShortValue: boolean = value.length > 3;
 
-          if (!result) {
+          if (!isNotShortValue) {
             this._searchLoading$.next(false);
           }
 
-          return result;
+          return isNotShortValue;
         }),
         map((query: ISearchQuery) => {
           this._searchLoading$.next(true);
           return query;
         }),
         debounceTime(250),
-        filter(({value, refresh}: ISearchQuery) => {
-          const result = (!refresh && value !== this._lastSearchedValue);
+        filter(({value}: ISearchQuery) => {
+          const isNewValue = value !== this._lastSearchedValue;
 
-          if (!result) {
+          if (!isNewValue) {
             this._searchLoading$.next(false);
           }
-          return result;
+          return isNewValue;
         }),
-        concatMap(({value: q}: ISearchQuery) => {
-          currentRequest = this.$http.get(`${this.searchUri}`, {params: {q}});
+        concatMap(({value}: ISearchQuery) => {
+          currentRequest = this.$http.get(`${this.searchUri}`, {params: {q: value}});
 
-          return combineLatest(currentRequest, of(q));
+          return combineLatest(currentRequest, of(value));
         }),
-        map(([res, q]: [ISearchResults, string]) => {
-          this._lastSearchedValue = q;
+        map(([res, value]: [ISearchResults, string]) => {
+          this._lastSearchedValue = value;
           this._searchLoading$.next(false);
           return res;
         }),

@@ -6,7 +6,6 @@ import {BASE_URL, BASE_URL_TOKEN, SEARCH_URI, SEARCH_URI_TOKEN} from './github-s
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GithubInterceptor} from './interceptors/github.interceptor';
 import {SharedModule} from '../shared/shared.module';
-import {NgZorroAntdModule} from 'ng-zorro-antd';
 
 
 @NgModule({

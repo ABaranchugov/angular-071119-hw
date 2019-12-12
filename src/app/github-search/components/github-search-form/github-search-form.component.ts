@@ -9,14 +9,7 @@ export class GithubSearchFormComponent {
   @Output()
   public onChangeValue: EventEmitter<string> = new EventEmitter<string>();
 
-  @Output()
-  public onRefresh: EventEmitter<void> = new EventEmitter<void>();
-
   public keyup(value: string): void {
     this.onChangeValue.emit(value);
-  }
-
-  public refresh(): void {
-    this.onRefresh.emit();
   }
 }

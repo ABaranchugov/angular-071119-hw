@@ -1,10 +1,8 @@
 <div nz-row>
   <div nz-col [nzSpan]="5"></div>
   <div nz-col [nzSpan]="14">
-    <app-github-search-form (onChangeValue)="changeValue($event)"
-                            (onRefresh)="refresh()"
-    >
-    </app-github-search-form>
+    <app-github-search-form (onChangeValue)="changeValue($event)"></app-github-search-form>
+    
     <app-github-search-results [loading$]="loading$"
                                [results$]="results$"
     >

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {SearchService} from './services/search.service';
 import {Observable} from 'rxjs';
 import {ISearchResults} from './models/search-results.model';
@@ -14,13 +14,10 @@ export class GithubSearchComponent {
 
   constructor(
     private $search: SearchService
-  ) {}
+  ) {
+  }
 
   public changeValue(value: string): void {
     this.$search.searchValue = value;
-  }
-
-  public refresh(): void {
-    this.$search.refresh();
   }
 }

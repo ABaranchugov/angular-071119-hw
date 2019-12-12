@@ -18,9 +18,7 @@ registerLocaleData(ru);
   imports: [
     BrowserModule,
     GithubSearchModule,
-    NgZorroAntdModule,
-    FormsModule,
-    HttpClientModule,
+
     BrowserAnimationsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: ru_RU }],

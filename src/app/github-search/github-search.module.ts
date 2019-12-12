@@ -16,8 +16,7 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
     GithubSearchResultsComponent
   ],
   imports: [
-    SharedModule,
-    NgZorroAntdModule
+    SharedModule
   ],
   exports: [
     GithubSearchComponent

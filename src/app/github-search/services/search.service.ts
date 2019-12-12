@@ -1,10 +1,13 @@
 import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {debounceTime, filter, map, shareReplay, switchMap} from 'rxjs/operators';
+import {debounceTime, filter, map, shareReplay} from 'rxjs/operators';
 import {SEARCH_URI_TOKEN} from '../github-search.config';
 import {ISearchResults} from '../models/search-results.model';
 import {ISearchQuery} from '../models/search-query.model';
+import {of} from 'rxjs/internal/observable/of';
+import {combineLatest} from 'rxjs/internal/observable/combineLatest';
+import {concatMap} from 'rxjs/internal/operators/concatMap';
 
 @Injectable({
   providedIn: 'root'
@@ -35,31 +38,43 @@ export class SearchService {
   }
 
   public refresh(): void {
-    this._searchValue$.next({value: this._lastSearchedValue, refresh: false});
+    this._searchValue$.next({value: this._lastSearchedValue, refresh: true});
   }
 
   private createSearchResultsStream(): void {
+    let currentRequest: Observable<any>;
+
     this._searchResults$ = this._searchValue$
       .pipe(
+        filter(({value}: ISearchQuery) => {
+          const result: boolean = value.length > 3;
+
+          if (!result) {
+            this._searchLoading$.next(false);
+          }
+
+          return result;
+        }),
         map((query: ISearchQuery) => {
           this._searchLoading$.next(true);
           return query;
         }),
-        debounceTime(1000),
+        debounceTime(250),
         filter(({value, refresh}: ISearchQuery) => {
-          const result = (!refresh && value !== this._lastSearchedValue) && value.length > 3;
+          const result = (!refresh && value !== this._lastSearchedValue);
 
           if (!result) {
             this._searchLoading$.next(false);
           }
           return result;
         }),
-        switchMap(({value: q}: ISearchQuery) => {
-          console.log('query');
-          this._lastSearchedValue = q;
-          return this.$http.get(`${this.searchUri}`, {params: {q}});
+        concatMap(({value: q}: ISearchQuery) => {
+          currentRequest = this.$http.get(`${this.searchUri}`, {params: {q}});
+
+          return combineLatest(currentRequest, of(q));
         }),
-        map((res: ISearchResults) => {
+        map(([res, q]: [ISearchResults, string]) => {
+          this._lastSearchedValue = q;
           this._searchLoading$.next(false);
           return res;
         }),
